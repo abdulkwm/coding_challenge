@@ -9,9 +9,13 @@ public class AutoCorrectPrototype {
             char[] chars = word.toCharArray();
             Arrays.sort(chars);
             String sorted = new String(chars);
-            List<String> anagrams = anagramMap.getOrDefault(sorted,new ArrayList<>());
-            anagrams.add(word);
-            anagramMap.put(sorted, anagrams);
+//            List<String> anagrams = anagramMap.getOrDefault(sorted,new ArrayList<>());
+//            anagrams.add(word);
+//            anagramMap.put(sorted, anagrams);
+            if (!anagramMap.containsKey(sorted)){
+                anagramMap.put(sorted,new ArrayList<>());
+            }
+            anagramMap.get(sorted).add(word);
         }
         List<List<String>> results = new ArrayList<>();
         for (String query : queries){
