@@ -1,23 +1,37 @@
 package day1;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Split_alphabet {
-    public int solution(String S) {
-        int[] lastSeen = new int[26];
-        int start = 0, end = 0, count = 0;
-        for (int i = 0; i < S.length(); i++){
-            int index = S.charAt(i) - 'a';
-            end = Math.max(end, lastSeen[index]);
-            if (end == i) {
+    private static int solution(String str) {
+//        int count = 0;
+//        for (int i = 0; i < str.length(); i++){
+//            boolean isRepeated = false;
+//            for (int j = 0; j < str.length(); j++){
+//                if ( i!= j && str.charAt(i) == str.charAt(j)){
+//                    isRepeated = true;
+//                    break;
+//                }
+//            }
+//            if (!isRepeated){
+//                count++;
+//            }
+//        }
+//        return count;
+        Set<Character> unique = new HashSet<>();
+        int count  = 0;
+        for (char c : str.toCharArray()){
+            if (unique.contains(c)){
+                unique.clear();
                 count++;
-                start = i + 1;
             }
-            lastSeen[index] = i + 1;
+            unique.add(c);
         }
-        return count;
+        return count + 1;
     }
     public static void main(String[] args) {
-        Split_alphabet solution = new Split_alphabet();
 
-        System.out.println(solution.solution("djfkshahfiosja"));
+        System.out.println(solution("wlorld"));
     }
 }
